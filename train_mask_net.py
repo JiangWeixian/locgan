@@ -1,0 +1,3 @@
+'''
+train locgan entry file
+'''

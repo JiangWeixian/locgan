@@ -1,6 +1,12 @@
-# 修改文件
+# LOCGAN
 
-* datasets path config
-* switch cuda an cc
-* load network weights
-* **./make.sh**
+> init
+
+## Changelog
+
+* init
+* rm unusecode
+
+**Warning**
+
+* test&eval含有两个暂时都是不可用的

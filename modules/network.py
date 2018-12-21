@@ -59,21 +59,14 @@ def define_netD(which_model_netD, network_config, x_dim):
     '''
     network = create_gans_network_grah(network_config, x_dim)[0]
     if which_model_netD == 'fm':
-        netD =  GanFMDiscriminator(layers=network)
+        netD = GanFMDiscriminator(layers=network)
         netD.apply(gans_weights_init)
     elif which_model_netD == 'fm2':
-        netD =  GanFMDiscriminator2(layers=network)
+        netD = GanFMDiscriminator2(layers=network)
         netD.apply(gans_weights_init)
     elif which_model_netD == 'res101':
         netD = ResNet101Dis(Bottleneck, [3, 4, 23, 3])
     return netD
-
-def define_netL(which_model_netL, x_dim):
-    '''build network L
-    '''
-    if which_model_netL == 'res18':
-        netL =  NetLocation()
-    return netL
 
 class ResNet101Dis(nn.Module):
     def __init__(self, block, layers, num_classes=21):
@@ -1342,50 +1335,9 @@ class UnetMask(nn.Module):
         return x
 
 if __name__ == '__main__':
-    # NETG
-    # netG = ResnetGeneratorMASK(3,1)
-    # input = Variable(torch.randn(1, 3, 300, 300))
-    # feats, conf, loc = netG.forward(input)
-    # for item in feats:
-    #     print(item.size())
-
-    # netG = ResNet(BasicBlock, [2, 2, 2, 2])
-    # input = Variable(torch.randn(1, 3, 300, 300))
-    # x = netG.forward(input)
-    # print(x.size())
-
     netG = ResNet101Dssd512(Bottleneck, [3, 4, 23, 3])
     # netG = ResNet18Dssd(BasicBlock, [2, 2, 2, 2])
     # print(netG)
     input = Variable(torch.randn(1, 3, 512, 512))
     netG.forward(input)
 
-    # print(ResNet(Bottleneck, [3, 4, 23, 3]))
-
-    # NET M
-    # netM = NetMask2(512, 3)
-    # print(netM)
-    # input = Variable(torch.randn(1, 512, 41, 41))
-    # print(netM.forward(input).size())
-    # fm = [[('CONV', 64, 4, 2, 1), 'LR', ('CONV', 64*2, 4, 2, 1), 'B','LR'], [('CONV', 64*4, 4, 2, 1), 'B','LR'], [('CONV', 64*8, 4, 2, 1), 'B','LR'], [('CONV', 1, 4, 1, 0), 'S']]
-    # net = define_netD('fm', fm, 3)
-    # input = Variable(torch.randn(1, 3, 64, 64))
-    # net.forward(input)
-    # print(net)
-
-    # netM = test(0)
-    # print(netM)
-    # input = Variable(torch.randn(1, 3, 64, 64))
-    # netM.forward(input)
-
-    # NET L
-    # netl = define_netL('res18', 512)
-    # print(netl)
-    # input = [Variable(torch.randn(128, 128, 7, 7)), Variable(torch.randn(128, 128, 3, 3)), Variable(torch.randn(128, 128, 2, 2))]
-    # netM = define_netG('unet', 3)
-    # print(netM)
-    # input = Variable(torch.randn(1, 3, 321, 321))
-    # print(netM.forward(input).size())
-    # net = UnetMask()
-    # input = Variable(torch.randn(1, 3, 256, 256))
-    # print(net.forward(input).size())

@@ -2,7 +2,7 @@ import argparse
 from .cfg_gans import grah_netG, grah_netD, grah_netL, grah_netC
 from .cfg_priorbox import v1, v2, v3, v4, v6
 
-mode = 'train'
+mode = 'test'
 parser = argparse.ArgumentParser()
 parser.add_argument('--name', default='coco-rgb21', help='the name of this model, deside the savepath of .pth .png files')
 parser.add_argument('--mode', default='test', help='train mode: train/pre-train/test/continue')
