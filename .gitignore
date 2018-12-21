@@ -1,6 +1,6 @@
 /checkpoints/
-/test/
 /pycocotools/
 /.vscode/*
+/test/*
 /eval/*
 *.pyc

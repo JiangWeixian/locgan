@@ -6,6 +6,7 @@
 
 * init
 * rm unusecode
+  > reduce network only to G/D
 
 **Warning**
 
