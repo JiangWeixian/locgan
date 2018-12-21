@@ -1,0 +1,32 @@
+import argparse
+from .cfg_gans import grah_netG, grah_netD, grah_netL, grah_netC
+from .cfg_priorbox import *
+
+parser = argparse.ArgumentParser()
+parser.add_argument('--name', default='voc-res101-stage2-160-200', help='the name of this model, deside the savepath of .pth .png files')
+parser.add_argument('--mode', default='train', help='train mode: train/pre-train/test/continue')
+parser.add_argument('--batch_size', default=1, help='the batch size of training data')
+parser.add_argument('--fine_size', default=321, help='the img will be resize as [fine_size, fine_size]')
+parser.add_argument('--epochs', default=200, help='total train 200 epochs')
+parser.add_argument('--input_dim', default=3, help='the nums of color channels, RGB imgs channels is 3')
+parser.add_argument('--output_dim', default=1, help='the nums of color channels of netG')
+parser.add_argument('--beta_gans', default=0.5, help='the beta in optim')
+parser.add_argument('--cfg_priors', default=v6, help='the config for Priorboxes')
+parser.add_argument('--lr', default=1e-4, help='learning rate')
+parser.add_argument('--momentum', default=0.9, help='the config for SGD optimizer')
+parser.add_argument('--weight_decay', default=5e-3, help='weight decay for SGD')
+parser.add_argument('--default_rate', default=0.1, help='weight of mask loss')
+parser.add_argument('--cuda', default=True, help='support cuda or not')
+parser.add_argument('--cc', default=False, help='support tensorboard or not')
+parser.add_argument('--save_dir', default='checkpoints/', help='the save dir of train-output')
+parser.add_argument('--save_epoch_freq', default=100, help='frequency of saving results')
+parser.add_argument('--pretrained_path', default='/home/ubuntu426/JW/gans-detection-dssdmask/weights/resnet101-5d3b4d8f.pth', help='the model weight for resnet18')
+parser.add_argument('--g_network_path', default='/media/eric/GANS/tmp/voc-res101/voc-res101-finsize321/stage5/epoch_196_TRAIN_DETECT_netG_.pth', help='For continue train mode, the path of netG weights')
+parser.add_argument('--d_network_path', default='/media/eric/GANS/epoch_10_TRAIN_DETECT_netG_.pth', help='For continue train mode, the path of netD weights')
+parser.add_argument('--m_network_path', default='/home/eric/Documents/PY35/gans-rpg-stage2/checkpoints/voc-res101-stage2-160-200/epoch_0_TRAIN_DETECT_netM.pth', help='For continue train mode, the path of netL weights')
+parser.add_argument('--num_classes', default=21, help='class num')
+parser.add_argument('--nms_thresh', default=0.45, help='nms for detection')
+parser.add_argument('--overlap_thresh', default=0.5, help='threshold for match')
+parser.add_argument('--bkg_label', default=0, help='the label for background')
+
+Optdetection = parser.parse_args()
