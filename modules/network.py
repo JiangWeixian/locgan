@@ -7,6 +7,7 @@ import math
 import torch
 import functools
 
+from config import grah_netD
 from util.weight import gans_weights_init, classify_weights_init
 from util.build import create_gans_network_grah, create_location_network_grah
 # from data.config import CLASSES
@@ -29,7 +30,7 @@ def define_netG(which_model_netG, x_dim):
     return netG
 
 
-def define_netD(which_model_netD, network_config, x_dim):
+def define_netD(which_model_netD, x_dim):
     '''build network D
 
     @Params:
@@ -40,7 +41,7 @@ def define_netD(which_model_netD, network_config, x_dim):
     @Returns:
     the network D
     '''
-    network = create_gans_network_grah(network_config, x_dim)[0]
+    network = create_gans_network_grah(grah_netD[which_model_netD], x_dim)[0]
     if which_model_netD == 'fm':
         netD = GanFMDiscriminator(layers=network)
         netD.apply(gans_weights_init)
@@ -168,3 +169,9 @@ class ResnetBlock(nn.Module):
         out = x + self.conv_block(x)
         return out
 
+if __name__ == '__main__':
+    netG = ResnetGenerator(3, 1)
+    input = Variable(torch.randn(1, 3, 300, 300))
+    print(netG(input))
+    netD = define_netD('fm', 1)
+    print(netD)
