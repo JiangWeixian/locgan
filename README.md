@@ -18,15 +18,18 @@
 
 ## Run
 
-```
+```bash
 sudo docker run -d -p 8888:8888 -p 8889:8889 --name crayon alband/crayon
+# check datasets config in dataloader/config.py
+python train_mask_net.py
+# see train loss detain in localhost:8888
 ```
 
 ## TODO
 
 * [x] - dataloader
 * [x] - model file
-* [ ] - train it
+* [x] - train it
 
 ## Changelog
 
