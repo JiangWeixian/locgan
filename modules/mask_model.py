@@ -130,9 +130,6 @@ class MASKMODEL(BaseModel):
         self.backward_G()
         self.G_solver.step()
 
-        # Visual
-        # self.visual()
-
     def save_image(self, label, epoch):
         log.info("Saving MG(source/real_mask/fake_mask) - [epochs: {}  cnt: {}] in {}".format(epoch, self.cnt, self.save_dir))
         vutils.save_image(self.source.data, '{}/epoch{}_{}_mask_source.png'.format(self.save_dir, epoch, label))
