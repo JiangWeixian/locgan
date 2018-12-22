@@ -1,10 +1,32 @@
 # LOCGAN
 > init
 
+## DEP
+
+* docker - using torrvision/crayon for tensorboard
+
+  ```bash
+  sudo apt-get install docker.io
+  ```
+
+  then follow docs in [torchvision/crayon](https://github.com/torrvision/crayon)
+
+  **maybe you need vpn to download docker and docker image**
+
+* pytorchv0.3 - sorry for old version
+* gpu mode - **only in cuda**
+
+## Run
+
+```
+sudo docker run -d -p 8888:8888 -p 8889:8889 --name crayon alband/crayon
+```
+
 ## TODO
 
 * [x] - dataloader
-* [ ] - model file
+* [x] - model file
+* [ ] - train it
 
 ## Changelog
 
@@ -15,4 +37,4 @@
 
 **Warning**
 
-* test&eval含有两个暂时都是不可用的
+* test&eval files not valid

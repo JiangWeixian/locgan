@@ -68,7 +68,6 @@ class GanFMDiscriminator(nn.Module):
             part = nn.Sequential(*layers[i])
             network_parts.append(part)
         self.main = nn.ModuleList(network_parts)
-        self.conf = nn.Linear(512*4*4, 21)
 
     def forward(self, input):
         x = input
@@ -77,8 +76,7 @@ class GanFMDiscriminator(nn.Module):
             x = self.main[index](x)
             outputs.append(x)
         x = outputs[-2].view(outputs[-2].size(0), -1)
-        conf = self.conf(x)
-        return outputs[-1], outputs[:-1], conf
+        return outputs[-1], outputs[:-1]
 
 # Res
 class ResnetGenerator(nn.Module):
@@ -181,4 +179,5 @@ if __name__ == '__main__':
     input = Variable(torch.randn(1, 3, 333, 500))
     print(netG(input))
     netD = define_netD('fm', 1)
-    print(netD)
+    input = Variable(torch.randn(1, 1, 300, 300))
+    print(netD(input))

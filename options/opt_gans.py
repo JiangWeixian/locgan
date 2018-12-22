@@ -15,7 +15,7 @@ parser.add_argument('--output_dim', default=1, help='the nums of color channels 
 parser.add_argument('--beta_gans', default=0.5, help='the beta in optim')
 parser.add_argument('--lr', default=2e-4, help='learning rate')
 parser.add_argument('--cuda', default=True, help='support cuda or not')
-parser.add_argument('--cc', default=False, help='support tensorboard or not')
+parser.add_argument('--cc', default=True, help='support tensorboard or not')
 parser.add_argument('--default_rate', default=0.1)
 parser.add_argument('--improve_rate', default=0.5)
 parser.add_argument('--which_model_netG', default='mask', help='deside which netG class to build netG')

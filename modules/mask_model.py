@@ -117,7 +117,7 @@ class MASKMODEL(BaseModel):
         # backward G
         self.loss_G.backward(retain_graph=True)
 
-    def train(self, source, mask, target, anno, wh):
+    def train(self, source, mask, wh):
         # draft data from datasets
         self.draft_data(source, mask, wh)
 

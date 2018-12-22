@@ -18,6 +18,8 @@ Network = MASKMODEL(opts)
 
 for epoch in range(opts.epochs):
   for i, (source, mask, wh) in enumerate(Dataloader):
-        print (i, source, mask, wh)
-        if i == 10:
-            break
+        Network.train(source, mask, wh)
+        if epoch % opts.save_epoch_freq == 0:
+            Network.save(opts.mode, i)
+        if epoch % opts.log_iters_freq == 0:
+            print(Network.current_errors())
