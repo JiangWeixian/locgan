@@ -147,7 +147,7 @@ class MASKMODEL(BaseModel):
     def save(self, label, epoch):
         log.info("*" * 50)
         log.info("Epoch: {}  Iters: {}".format(epoch, self.cnt))
-        save_dir = os.path.join(self.save_dir, self.name)
+        save_dir = os.path.join(self.save_dir, self.name())
         if not os.path.exists(save_dir):
             os.makedirs(save_dir)
         self.save_image(label, epoch)

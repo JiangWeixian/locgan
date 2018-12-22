@@ -21,5 +21,5 @@ for epoch in range(opts.epochs):
         Network.train(source, mask, wh)
         if epoch % opts.save_epoch_freq == 0:
             Network.save(opts.mode, i)
-        if epoch % opts.log_iters_freq == 0:
+        if i % opts.log_iters_freq == 0:
             print(Network.current_errors())
