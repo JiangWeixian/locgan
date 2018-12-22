@@ -471,15 +471,13 @@ def mask_collate(batch):
     '''Forked from ssd.pytorch
     '''
     imgs = []
-    targets = []
-    annos = []
+    masks = []
     wh = []
     for sample in batch:
         imgs.append(sample[0])
-        targets.append(sample[1])
-        annos.append(torch.FloatTensor(sample[2]))
-        wh.append(torch.FloatTensor(sample[3]))
-    return torch.stack(imgs, 0), targets, annos, wh
+        masks.append(sample[1])
+        wh.append(torch.FloatTensor(sample[2]))
+    return torch.stack(imgs, 0), torch.stack(masks, 0), wh
 
 def target_collate(batch):
     '''Forked from ssd.pytorch
