@@ -171,7 +171,7 @@ class ResnetBlock(nn.Module):
 
 if __name__ == '__main__':
     netG = ResnetGenerator(3, 1)
-    input = Variable(torch.randn(1, 3, 300, 300))
+    input = Variable(torch.randn(1, 3, 333, 500))
     print(netG(input))
     netD = define_netD('fm', 1)
     print(netD)

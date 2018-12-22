@@ -36,16 +36,12 @@ class DetectModel(BaseModel):
         self.fine_size = opt.fine_size
         self.cuda = opt.cuda
         self.num_classes = opt.num_classes
-        self.cfg = v6
-        self.priors = PriorBox(self.cfg)
-        self.priorboxes = Variable(self.priors.train(), volatile=True)
         self.cnt = 0
 
         # init input
         self.source = self.Tensor(opt.batch_size, opt.input_dim, opt.fine_size, opt.fine_size)
-        self.anno = []
+        self.mask = self.Tensor(opt.batch_size, opt.input_dim, opt.fine_size, opt.fine_size)
         self.mask = []
-        self.target = []
 
         # init network
         self.netG = define_netG('res101', 3)

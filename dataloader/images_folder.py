@@ -13,7 +13,7 @@ import torch
 import torch.utils.data as data
 import torchvision.transforms as transforms
 import numpy as np
-from config import IMAGE_PATH
+from config import IMAGE_PATH, FINE_SIZE
 from PIL import Image, ImageDraw, ImageFont
 
 # for making bounding boxes pretty
@@ -21,7 +21,7 @@ COLORS = ((255, 0, 0, 128), (0, 255, 0, 128), (0, 0, 255, 128),
           (0, 255, 255, 128), (255, 0, 255, 128), (255, 255, 0, 128))
 
 source_transformer = transforms.Compose([
-        # TODO: Scale
+        transforms.Resize((FINE_SIZE, FINE_SIZE)),
         transforms.ToTensor()])
 
 mask_transformer = source_transformer

@@ -15,3 +15,4 @@ std=[ 62.62723199/255,  61.18791482/255,  61.99810061/255]
 
 # IMAGE_FOLDER_LOADER
 IMAGE_PATH = '/media/eric/Elements/datasets/coco'
+FINE_SIZE = 300

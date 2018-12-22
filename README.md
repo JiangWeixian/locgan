@@ -1,12 +1,17 @@
 # LOCGAN
-
 > init
+
+## TODO
+
+* [x] - dataloader
+* [ ] - model file
 
 ## Changelog
 
 * init
 * rm unusecode
   > reduce network only to G/D
+* complete dataloader
 
 **Warning**
 
