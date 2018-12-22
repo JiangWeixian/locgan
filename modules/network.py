@@ -6,6 +6,7 @@ import numpy as np
 import math
 import torch
 import functools
+import glog as log
 
 from config import grah_netD
 from util.weight import gans_weights_init, classify_weights_init
@@ -24,9 +25,12 @@ def define_netG(which_model_netG, x_dim):
     @Returns:
     the network G
     '''
+    netG = None
     if which_model_netG == 'mask':
         netG = ResnetGenerator(3, 1)
         netG.apply(gans_weights_init)
+    if not netG:
+        log.warning('Warning: Network g is none')
     return netG
 
 
@@ -42,9 +46,12 @@ def define_netD(which_model_netD, x_dim):
     the network D
     '''
     network = create_gans_network_grah(grah_netD[which_model_netD], x_dim)[0]
+    netD = None
     if which_model_netD == 'fm':
         netD = GanFMDiscriminator(layers=network)
         netD.apply(gans_weights_init)
+    if not netD:
+        log.warning('Warning: Network d is none')
     return netD
 
 class GanFMDiscriminator(nn.Module):
