@@ -62,7 +62,7 @@ class IMAGELOADER(data.Dataset):
     def pull_item(self, index):
         img_id, mask_id = self.ids[index]
 
-        img = Image.open(img_id)
+        img = Image.open(img_id).convert('RGB')
         width, height = img.size
         mask = Image.open(mask_id).resize((width, height)).convert('L')
 

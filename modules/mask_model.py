@@ -11,6 +11,7 @@ import sys
 
 from .loss.loss import GANLoss, criterion_fmloss
 from .funcs.layer import layer_upsample
+from .util.bbox import mask_crop
 from pycrayon import CrayonClient
 
 from .base_model import BaseModel
@@ -34,7 +35,7 @@ class MASKMODEL(BaseModel):
 
         # init network
         self.netG = define_netG(opt.which_model_netG, 3)
-        self.netD = define_netD(opt.which_model_netD, 1)
+        self.netD = define_netD(opt.which_model_netD, 3)
 
         # load pretrain network
         if opt.g_network_path:
@@ -86,11 +87,12 @@ class MASKMODEL(BaseModel):
         self.fake = self.netG.forward(self.source)
 
         # get fake loss
-        self.pred_fake, _ = self.netD.forward(self.fake)
+        self.fake = self.fake * (self.fake > 0.01).float()
+        self.pred_fake, _ = self.netD.forward(mask_crop(self.source, self.fake))
         self.loss_D_fake = self.criterionGAN(self.pred_fake, False)
 
         # real
-        self.pred_real, self.feats_real = self.netD.forward(self.mask)
+        self.pred_real, self.feats_real = self.netD.forward(mask_crop(self.source, self.mask))
         
         # get real loss
         self.loss_D_real = self.criterionGAN(self.pred_real, True)
@@ -105,7 +107,7 @@ class MASKMODEL(BaseModel):
 
     def backward_G(self):
         # fake
-        pred_fake, feats_fake = self.netD.forward(self.fake)
+        pred_fake, feats_fake = self.netD.forward(mask_crop(self.source, self.fake))
         self.loss_G_GAN = self.criterionGAN(pred_fake, True)
 
         # get fm loss
