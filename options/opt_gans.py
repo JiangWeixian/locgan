@@ -23,7 +23,7 @@ parser.add_argument('--which_model_netD', default='fm', help='deside which netD 
 parser.add_argument('--save_dir', default='checkpoints/', help='the save dir of train-output')
 parser.add_argument('--save_epoch_freq', default=10, help='frequency for saving results')
 parser.add_argument('--log_iters_freq', default=100, help='frequency for log errors')
-parser.add_argument('--g_network_path', default='')
-parser.add_argument('--d_network_path', default='')
+parser.add_argument('--g_network_path', default='/home/eric/Documents/PY35/locgan/checkpoints/mask/epoch_40_train_mask_netG.pth')
+parser.add_argument('--d_network_path', default='/home/eric/Documents/PY35/locgan/checkpoints/mask/epoch_40_train_mask_netD.pth')
 
 opts = parser.parse_args()
